@@ -4,39 +4,6 @@ My personal configuration of **dwm (dynamic window manager)** — minimal, fast,
 
 This repository contains the **full dwm source**, applied patches, configuration, and startup scripts in a **clean and reproducible layout**, so it can be cloned and used again on any system with minimal effort.
 
----
-
-## What is dwm?
-
-**dwm** is an extremely fast, small, and dynamic window manager for X.  
-It is configured by editing C source code and recompiling, which makes it simple, efficient, and highly customizable.
-
-If you prefer keyboard-driven workflows, minimalism, and full control, dwm is ideal.
-
----
-
-## What This Repository Provides
-
-- Full dwm source code (not just config snippets)
-- Carefully chosen patches
-- Clean Git history (no binaries or generated files)
-- Autostart handled via script (no recompilation needed)
-- Easy reinstallation on a fresh system
-
-This repo is meant to be **cloned → built → used**, even years later.
-
----
-
-## Features in This Setup
-
-- Minimal, stock dwm base
-- Keyboard-driven workflow
-- Lightweight and fast (no bloat)
-- Patch-based enhancements
-- Script-based autostart
-
----
-
 ## Patches Used
 
 All patches are stored in the `patches/` directory for reference and reapplication:
