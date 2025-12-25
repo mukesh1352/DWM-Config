@@ -148,13 +148,10 @@ DWM-Config/
 
 ---
 
-## Notes for Future Me 🙂
+## Notes 
 
 * Never commit `config.h`
 * Keep patches isolated in `patches/`
-* Autostart changes do NOT require recompiling dwm
-* Tag stable versions using Git tags
-* This repo alone is enough to rebuild dwm from scratch
 
 ---
 
