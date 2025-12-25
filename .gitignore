@@ -1,0 +1,11 @@
+# binaries
+dwm
+
+# build files
+*.o
+
+# generated config
+config.h
+
+# editor files
+*~
