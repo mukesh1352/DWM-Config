@@ -1,36 +1,51 @@
 # DWM-Config
 
-My personal configuration of **dwm (dynamic window manager)** — minimal, fast, and patched for daily use.
+My personal configuration of **dwm (dynamic window manager)** — minimal, fast, patched, and designed for long-term reuse.
 
-This repository contains the **full dwm source**, applied patches, and configuration in a clean, reproducible way.
+This repository contains the **full dwm source**, applied patches, configuration, and startup scripts in a **clean and reproducible layout**, so it can be cloned and used again on any system with minimal effort.
 
 ---
 
 ## What is dwm?
 
-dwm is an extremely fast, small, and dynamic window manager for X.  
-It is configured by editing source code and recompiling, which makes it simple, efficient, and hackable.
+**dwm** is an extremely fast, small, and dynamic window manager for X.  
+It is configured by editing C source code and recompiling, which makes it simple, efficient, and highly customizable.
+
+If you prefer keyboard-driven workflows, minimalism, and full control, dwm is ideal.
 
 ---
 
-## Features in this Setup
+## What This Repository Provides
+
+- Full dwm source code (not just config snippets)
+- Carefully chosen patches
+- Clean Git history (no binaries or generated files)
+- Autostart handled via script (no recompilation needed)
+- Easy reinstallation on a fresh system
+
+This repo is meant to be **cloned → built → used**, even years later.
+
+---
+
+## Features in This Setup
 
 - Minimal, stock dwm base
-- Carefully selected patches
 - Keyboard-driven workflow
 - Lightweight and fast (no bloat)
+- Patch-based enhancements
+- Script-based autostart
 
 ---
 
 ## Patches Used
 
-The following patches are applied and stored in the `patches/` directory:
+All patches are stored in the `patches/` directory for reference and reapplication:
 
-- **attachaside** – New clients attach beside the master area
+- **attachaside** – New clients attach beside the master window
 - **pertag** – Per-tag layouts and settings
 - **scratchpad** – Drop-down terminal for quick access
 
-> Patch files are kept separately for reference and reapplication.
+> Patch files are kept separately to keep the source tree clean and understandable.
 
 ---
 
@@ -38,15 +53,17 @@ The following patches are applied and stored in the `patches/` directory:
 
 To build dwm, you need:
 
+- X11 (Xorg)
 - Xlib header files
-- A working X11 environment
-- A C compiler (gcc / clang)
+- A C compiler (`gcc` or `clang`)
 - `make`
 
-On Arch-based systems:
+### Arch Linux
 ```bash
 sudo pacman -S xorg-server xorg-xinit libx11
 ````
+
+(Install equivalent packages on other distributions.)
 
 ---
 
@@ -81,7 +98,7 @@ make clean install
 
 ### Using `.xinitrc`
 
-Add the following line to your `~/.xinitrc`:
+Add the following line to `~/.xinitrc`:
 
 ```sh
 exec dwm
@@ -95,33 +112,55 @@ startx
 
 ---
 
-## Status Bar (Example)
+## Autostart
 
-To display status information in the dwm bar, you can use `xsetroot`:
+This setup uses the **autostart patch**.
 
-```sh
-while xsetroot -name "$(date) | $(uptime | sed 's/.*,//')"
-do
-  sleep 1
-done &
-exec dwm
+Startup applications are defined in:
+
+```
+scripts/autostart.sh
 ```
 
-(You can later replace this with `slstatus` or a custom script.)
+This file is **tracked in the repository** and **symlinked** to:
+
+```
+~/.dwm/autostart.sh
+```
+
+### Included services
+
+* Wallpaper (`feh`)
+* Compositor (`picom`)
+* Notifications (`dunst`)
+* Polkit authentication agent
+* Status bar (`dwmblocks`)
+
+### Editing autostart
+
+No recompilation is required.
+
+After changes:
+
+```bash
+Mod + Shift + r   # restart dwm
+```
 
 ---
 
-## Configuration
+## Configuration Workflow (Important)
 
 * All configuration is done in **`config.def.h`**
-* After modifying it, regenerate and recompile:
+* `config.h` is generated and ignored by Git
+
+After any config change:
 
 ```bash
 cp config.def.h config.h
 make clean install
 ```
 
-This keeps the repository clean and portable.
+This keeps the repository **clean, portable, and reproducible**.
 
 ---
 
@@ -129,12 +168,14 @@ This keeps the repository clean and portable.
 
 ```
 DWM-Config/
-├── config.def.h      # main configuration
-├── patches/          # dwm patches
-├── dwm.c             # dwm source
+├── config.def.h        # main dwm configuration
+├── patches/            # dwm patches
+├── scripts/
+│   └── autostart.sh    # startup programs
+├── dwm.c               # dwm source
 ├── Makefile
 ├── config.mk
-├── README
+├── README.md
 └── LICENSE
 ```
 
@@ -142,10 +183,11 @@ DWM-Config/
 
 ## Notes for Future Me 🙂
 
-* `config.h` is always generated — never commit it
+* Never commit `config.h`
 * Keep patches isolated in `patches/`
+* Autostart changes do NOT require recompiling dwm
 * Tag stable versions using Git tags
-* Screenshot the setup if sharing publicly
+* This repo alone is enough to rebuild dwm from scratch
 
 ---
 
@@ -159,6 +201,3 @@ DWM-Config/
 ## License
 
 MIT / ISC (same as dwm)
-
-```
-
